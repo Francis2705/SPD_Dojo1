@@ -1,13 +1,17 @@
-# Documentacion Dojo D Ejercicio 1
+## Documentacion Dojo D Ejercicio 1
 ![Tinkercad](TinkercadArduino.png)
 
 
-## Integrantes 
-- Esteban Marcelo Quiroz  
+## Integrantes
+- De Maio, Juan Pablo
+- Martínez Balian, Francisco
+- Rojas Poleo, Freddy Ely
+- Soto, Camila Belen
+- Uthurburu Lima, Diego Fernando
 
 
-## Proyecto: Contador binario.
-![Tinkercad](./img/ContadorBinario.png)
+## Proyecto: Semáforos.
+![semaforos](semaforos.png)
 
 
 ## Descripción
