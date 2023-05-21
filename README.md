@@ -1,5 +1,5 @@
-# Ejemplo Documentación Dojos
-![Tinkercad](./img/ArduinoTinkercad.jpg)
+# Documentacion Dojo D Ejercicio 1
+![Tinkercad](TinkercadArduino.png)
 
 
 ## Integrantes 
