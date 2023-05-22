@@ -46,4 +46,4 @@ void sonar_piezo(int piezo, int veces, int tono)
 ~~~
 
 ## :robot: Link al proyecto
-- [Proyecto de Tinkercad](https://www.tinkercad.com/things/eC3Yu3tqiKS?sharecode=1y7bT8_4zWnDAKFgYElS3-JSdKASGZVDiffu9hXp7bk)
+- [Proyecto de Tinkercad](https://www.tinkercad.com/things/6xSCqML2DyV?sharecode=z2Q9z9rhp4b2qngiyllIVbcMxx6JTKIBWfbaY7I6D-g)
