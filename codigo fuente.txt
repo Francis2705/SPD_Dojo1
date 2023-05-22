@@ -1,15 +1,14 @@
 /*Francisco Martinez Balian
-1- El semáforo tiene que tener 2 leds de cada color 
-como mínimo, en caso de que uno se  rompa. 
-2- Tiene que implementar los tiempos correctos 
-como se detallan a continuación. 
-3- El verde dura 5 segundos. 
-4- El amarillo dura 3 segundos. 
-5- Rojo dura 5 segundos. 
-6- Tiene que tener señalización para personas no videntes 
-como se detalla a  continuación. (Buzzer o piezo)
-7- Durante el rojo: Tiene que sonar 2 vez por segundo 
-en un tono FUERTE.*/
+8-Durante el amarillo: Tiene que sonar 1 vez por segundo 
+en un tono SUAVE. 
+9-Al cambiar de verde a amarillo debe titilar 
+3 veces el verde antes de pasar al amarillo
+10-Al cambiar de amarillo a rojo se debe titilar 
+3 veces el amarillo
+11-Al cambiar de rojo a Amarillo se debe titilar 
+3 veces el rojo
+12-Al cambiar de amarillo a verde se debe titilar 
+3 veces el amarillo.*/
 
 #define LED_VERDE_1 12
 #define LED_VERDE_2 11
@@ -42,23 +41,33 @@ void loop()
   apagar(LED_VERDE_1);
   apagar(LED_VERDE_2);
   
+  titilar(LED_VERDE_1, LED_VERDE_2);
+  
   prender(LED_AMARILLO_1);
   prender(LED_AMARILLO_2);
-  delay(tiempoA);
+  sonar_piezo(PIEZO, 3, 200);
+  //delay(tiempoA);
   apagar(LED_AMARILLO_1);
   apagar(LED_AMARILLO_2);
+  
+  titilar(LED_AMARILLO_1, LED_AMARILLO_2);
   
   prender(LED_ROJO_1);
   prender(LED_ROJO_2);
-  sonar_piezo(PIEZO, 10, 500);
+  sonar_piezo(PIEZO, 10, 1000);
   apagar(LED_ROJO_1);
   apagar(LED_ROJO_2);
   
+  titilar(LED_ROJO_1, LED_ROJO_2);
+  
   prender(LED_AMARILLO_1);
   prender(LED_AMARILLO_2);
-  delay(tiempoA);
+  //delay(tiempoA);
+  sonar_piezo(PIEZO, 3, 200);
   apagar(LED_AMARILLO_1);
   apagar(LED_AMARILLO_2);
+  
+  titilar(LED_AMARILLO_1, LED_AMARILLO_2);
 }
 
 void prender(int led1)
@@ -75,13 +84,33 @@ void apagar(int led1)
 
 void sonar_piezo(int piezo, int veces, int tono)
 {
+  int tiempo = 250;
+
+  if(tono < 500) //si el sonido es bajo
+  {
+    tiempo = 300;
+  }
+  
   for(int contador = 0; contador < veces; contador ++)
   {
     tone(piezo, tono);
     Serial.println("Hago sonar");
-    delay(250);
+    delay(tiempo);
     noTone(piezo);
     Serial.println("Dejo de sonar");
-    delay(250);
+    delay(tiempo);
+  }
+}
+
+void titilar(int ledTitilar, int ledTitilar2)
+{
+  for(int i = 0; i < 4; i++)
+  {
+    prender(ledTitilar);
+    prender(ledTitilar2);
+    delay(500);
+    apagar(ledTitilar);
+    apagar(ledTitilar2);
+    delay(500);
   }
 }
