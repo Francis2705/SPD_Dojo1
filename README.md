@@ -6,8 +6,6 @@
 - De Maio, Juan Pablo
 - Martínez Balian, Francisco
 - Rojas Poleo, Freddy Ely
-- Soto, Camila Belen
-- Uthurburu Lima, Diego Fernando
 
 
 ## Proyecto: Semáforos.
