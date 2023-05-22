@@ -1,14 +1,12 @@
 /*Francisco Martinez Balian
-8-Durante el amarillo: Tiene que sonar 1 vez por segundo 
-en un tono SUAVE. 
-9-Al cambiar de verde a amarillo debe titilar 
-3 veces el verde antes de pasar al amarillo
-10-Al cambiar de amarillo a rojo se debe titilar 
-3 veces el amarillo
-11-Al cambiar de rojo a Amarillo se debe titilar 
-3 veces el rojo
-12-Al cambiar de amarillo a verde se debe titilar 
-3 veces el amarillo.*/
+13- Agregar un botón (pull down) que al presionarlo se 
+active la funcionalidad de luz verde con más tiempo, 
+dándole a la persona que lo necesite más tiempo para 
+cruzar la calle , sirve para la próxima luz verde y 
+solo para la próxima luz verde después de presionar 
+el botón. el tiempo se duplicará. 
+14- Colocar dos semáforos de calles que se crucen y 
+programarlos para que funcionen en conjunto.*/
 
 #define LED_VERDE_1 12
 #define LED_VERDE_2 11
@@ -16,10 +14,12 @@ en un tono SUAVE.
 #define LED_AMARILLO_2 9
 #define LED_ROJO_1 8
 #define LED_ROJO_2 7
+#define BOTON 6
 #define PIEZO 2
 
 int tiempoRyV = 5000;
 int tiempoA = 3000;
+int lectura;
 
 void setup()
 {
@@ -30,39 +30,39 @@ void setup()
   pinMode(LED_ROJO_1, OUTPUT);
   pinMode(LED_ROJO_2, OUTPUT);
   pinMode(PIEZO, OUTPUT);
+  pinMode(BOTON, INPUT);
   Serial.begin(9600);
 }
 
 void loop()
 {
   prender(LED_VERDE_1);
-  prender(LED_VERDE_2);
+  prender(LED_ROJO_2);
   delay(tiempoRyV);
+  tiempoRyV = 5000;
   apagar(LED_VERDE_1);
-  apagar(LED_VERDE_2);
+  apagar(LED_ROJO_2);
   
-  titilar(LED_VERDE_1, LED_VERDE_2);
+  titilar(LED_VERDE_1, LED_ROJO_2);
   
   prender(LED_AMARILLO_1);
   prender(LED_AMARILLO_2);
   sonar_piezo(PIEZO, 3, 200);
-  //delay(tiempoA);
   apagar(LED_AMARILLO_1);
   apagar(LED_AMARILLO_2);
   
   titilar(LED_AMARILLO_1, LED_AMARILLO_2);
   
   prender(LED_ROJO_1);
-  prender(LED_ROJO_2);
+  prender(LED_VERDE_2);
   sonar_piezo(PIEZO, 10, 1000);
   apagar(LED_ROJO_1);
-  apagar(LED_ROJO_2);
+  apagar(LED_VERDE_2);
   
-  titilar(LED_ROJO_1, LED_ROJO_2);
+  titilar(LED_ROJO_1, LED_VERDE_2);
   
   prender(LED_AMARILLO_1);
   prender(LED_AMARILLO_2);
-  //delay(tiempoA);
   sonar_piezo(PIEZO, 3, 200);
   apagar(LED_AMARILLO_1);
   apagar(LED_AMARILLO_2);
@@ -72,12 +72,22 @@ void loop()
 
 void prender(int led1)
 {
+  lectura = digitalRead(BOTON);
+  if(lectura == 1)
+  {
+    tiempoRyV = 10000;
+  }
   digitalWrite(led1, HIGH);
   Serial.println("Prendo led");
 }
 
 void apagar(int led1)
 {
+  lectura = digitalRead(BOTON);
+  if(lectura == 1)
+  {
+    tiempoRyV = 10000;
+  }
   digitalWrite(led1, LOW);
   Serial.println("Apago led");
 }
@@ -106,6 +116,11 @@ void titilar(int ledTitilar, int ledTitilar2)
 {
   for(int i = 0; i < 4; i++)
   {
+    lectura = digitalRead(BOTON);
+    if(lectura == 1)
+    {
+      tiempoRyV = 10000;
+    }
     prender(ledTitilar);
     prender(ledTitilar2);
     delay(500);
