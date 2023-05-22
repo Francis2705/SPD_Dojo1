@@ -5,7 +5,6 @@
 ## Integrantes
 - De Maio, Juan Pablo
 - Martínez Balian, Francisco
-- Rojas Poleo, Freddy Ely
 
 
 ## Proyecto: Semáforos.
@@ -13,40 +12,38 @@
 
 
 ## Descripción
-En este parrafo deberan describir que funcion cumple su proyecto. Que solucion esta ofreciendo.
+Este proyecto se creó con la intención de lograr un semáforo el cual sirva para todas las personas, incluidas las no videntes. Para lograrlo utilizamos un piezo, que emite una secuencia de pitidos fuertes cuando el semáforo está en rojo. Hay 6 leds en total, 3 corresponden a un semáforo y los otros 3 a otro. Estos funcionan en conjunto.
 
-## Función principal
-Esta funcion se encarga de encender y apagar los leds.
-
-B0, B1, B2, B3 son #define que utilizamos para agregar los leds, asociandolo a pines de la placa arduino.
-
-(Breve explicación de la función)
+## Función principal: sonar_piezo(int piezo, int veces, int tono)
+Esta funcion se encarga de sonar el piezo cuando corresponde y también de apagarlo cuando no tiene que sonar.
+- PIEZO es un #define que se utiliza para referirnos al piezo como tal (indica en que pin está conectado).
+- 10 son las veces que va a sonar.
+- 1000 es el tono que va a tener.
 
 ~~~ C (lenguaje en el que esta escrito)
-void EncenderBinario(int estado3, int estado2,int estado1,int estado0)
+
+sonar_piezo(PIEZO, 10, 1000); //llamada en la funcion
+
+void sonar_piezo(int piezo, int veces, int tono)
 {
-  digitalWrite(B3,estado3);
-  digitalWrite(B2,estado2);
-  digitalWrite(B1,estado1);
-  digitalWrite(B0,estado0);
+  int tiempo = 250;
+
+  if(tono < 500) //si el sonido es bajo
+  {
+    tiempo = 300;
+  }
+  
+  for(int contador = 0; contador < veces; contador ++)
+  {
+    tone(piezo, tono);
+    Serial.println("Hago sonar");
+    delay(tiempo);
+    noTone(piezo);
+    Serial.println("Dejo de sonar");
+    delay(tiempo);
+  }
 }
 ~~~
 
 ## :robot: Link al proyecto
-- [proyecto](https://www.tinkercad.com/things/aOYiibnDjWu)
-## :tv: Link al video del proceso
-- [video](https://www.youtube.com/watch?v=VyGjE8kx-O0)
-
----
-### Fuentes
-- [Consejos para documentar](https://www.sohamkamani.com/how-to-write-good-documentation/#architecture-documentation).
-
-- [Lenguaje Markdown](https://markdown.es/sintaxis-markdown/#linkauto).
-
-- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
-
-- [Tutorial](https://www.youtube.com/watch?v=oxaH9CFpeEE).
-
-- [Emojis](https://gist.github.com/rxaviers/7360908).
-
----
+- [Proyecto de Tinkercad]([https://www.tinkercad.com/things/aOYiibnDjWu](https://www.tinkercad.com/things/eC3Yu3tqiKS?sharecode=1y7bT8_4zWnDAKFgYElS3-JSdKASGZVDiffu9hXp7bk))
