@@ -9,7 +9,7 @@
 
 
 ## Proyecto: Semáforos.
-![semaforos](semaforos.png)
+![semaforo](semaforos.png)
 
 
 ## Descripción
